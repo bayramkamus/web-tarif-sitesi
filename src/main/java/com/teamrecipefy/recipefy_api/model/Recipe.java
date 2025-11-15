@@ -22,6 +22,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "recipes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Recipe {
 
     @Id
@@ -57,7 +58,7 @@ public class Recipe {
     // Bir tarifin bir sahibi (kullanıcı) vardır.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles" })
+    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles", "hibernateLazyInitializer", "handler" })
     private User author; // Tarife ekleyen kullanıcı (author)
 
     // "Tariflere yorum yapma" [cite: 26, 70] özelliği için:

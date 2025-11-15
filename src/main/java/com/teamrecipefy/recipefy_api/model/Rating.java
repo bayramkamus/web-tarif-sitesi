@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ratings")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Rating {
 
     @Id
@@ -31,7 +32,7 @@ public class Rating {
     // Puanı veren kullanıcı
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles" })
+    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles", "hibernateLazyInitializer", "handler" })
     private User user;
 
     // Puanın verildiği tarif

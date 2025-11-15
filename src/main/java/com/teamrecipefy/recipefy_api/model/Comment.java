@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "comments")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Comment {
 
     @Id
@@ -32,7 +33,7 @@ public class Comment {
     // Yorumu yapan kullanıcı (Bir kullanıcı çok yorum yapabilir)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles" })
+    @JsonIgnoreProperties({ "password", "recipes", "favoriteRecipes", "roles", "hibernateLazyInitializer", "handler" })
     private User author;
 
     // Yorumun yapıldığı tarif (Bir tarifin çok yorumu olabilir)
