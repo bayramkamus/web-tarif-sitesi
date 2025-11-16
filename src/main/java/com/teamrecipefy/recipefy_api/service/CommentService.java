@@ -28,10 +28,12 @@ public class CommentService {
     private UserRepository userRepository; // Yorumu hangi kullanıcının yaptığını bulmak için
 
     // Herkese açık: Bir tarife ait tüm yorumları getir
+    @Transactional(readOnly = true)
     public List<Comment> getCommentsByRecipeId(Long recipeId) {
         return commentRepository.findAllByRecipeId(recipeId);
     }
 
+    @Transactional(readOnly = true)
     public Comment getCommentById(Long commentId) {
         return commentRepository.findById(commentId)
                 .orElseThrow(() -> new EntityNotFoundException("Comment not found with id: " + commentId));

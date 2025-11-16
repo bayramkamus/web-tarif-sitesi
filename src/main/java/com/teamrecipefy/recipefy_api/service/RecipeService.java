@@ -25,22 +25,26 @@ public class RecipeService {
     private UserRepository userRepository; // Kullanıcıyı bulmak için
 
     // Herkese açık: Tüm tarifleri sayfalı getir
+    @Transactional(readOnly = true)
     public Page<Recipe> getAllRecipes(Pageable pageable) {
         return recipeRepository.findAll(pageable);
     }
 
     // Herkese açık: Arama çubuğu için başlığa göre tarifleri sayfalı getir 
+    @Transactional(readOnly = true)
     public Page<Recipe> searchRecipesByTitle(String title, Pageable pageable) {
         return recipeRepository.findByTitleContainingIgnoreCase(title, pageable);
     }
     
     // Herkese açık: Tek bir tarifin detayını getir
+    @Transactional(readOnly = true)
     public Recipe getRecipeById(Long id) {
         return recipeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe not found with id: " + id));
     }
 
     // "Tariflerim": Belli bir kullanıcının tariflerini sayfalı getir 
+    @Transactional(readOnly = true)
     public Page<Recipe> getRecipesByAuthor(Long userId, Pageable pageable) {
         return recipeRepository.findByAuthorId(userId, pageable);
     }
